@@ -50,3 +50,14 @@ class LoadData:
             rul = np.append(rul, diff)
         
         return rul
+    
+    def save_interim(self, path, names):
+        """Save interim data."""
+        interim = np.concatenate(
+            (self.features, self.target.reshape(self.target.shape[0])),
+            axis=1
+        )
+        np.savetxt(
+            os.path.join(path, 'interim.csv'), interim, fmt='%.3f',
+            delimiter=',', header=','.join(names), comments=''
+        )
