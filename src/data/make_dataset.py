@@ -26,6 +26,8 @@ class LoadData:
         ----------
         filename (str): the name of dataset exist in path
         folder (str): directory where the data exist
+        names (list of str): list of feature names
+        sep (regex-string): separator for loading the dataset using pandas
         
         attributes
         ----------
