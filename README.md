@@ -38,7 +38,7 @@ In here, I use simulation data engine's provided by NASA which can be found [her
     ├── data            <- Scripts to download and/or generate dataset
     │   └── make_dataset.py
     │
-    ├── models            <- Scripts to train the model and then trained models to make predictions
+    ├── models            <- Scripts to train the model, inference, and save trained models
     │   └── train.py
     │   └── predict.py
     │
