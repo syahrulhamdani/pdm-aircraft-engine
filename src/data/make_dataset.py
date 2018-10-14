@@ -54,7 +54,7 @@ class LoadData:
     def save_interim(self, path, names):
         """Save interim data."""
         interim = np.concatenate(
-            (self.features, self.target.reshape(self.target.shape[0])),
+            (self.features, self.target.reshape(self.target.shape[0], -1)),
             axis=1
         )
         np.savetxt(
