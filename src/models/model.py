@@ -18,10 +18,8 @@ class NN(nn.Module):
         self.hidden_layers = nn.ModuleList([
             nn.Linear(input_size, hidden_sizes[0])
         ])
-        layers = zip([hidden_sizes[:-1], hidden_sizes[1:]])
-        self.hidden_layers.extend([
-            nn.Linear(h1, h2) for h1, h2 in layers
-        ])
+        layers = zip(hidden_sizes[:-1], hidden_sizes[1:])
+        self.hidden_layers.extend([nn.Linear(h1,h2) for h1,h2 in layers])
         self.output = nn.Linear(hidden_sizes[-1], output_size)
         self.dropout = nn.Dropout(drop_p)
     
