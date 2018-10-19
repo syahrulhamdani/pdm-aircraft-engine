@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import os
+from sklearn.preprocessing import StandardScaler
 
 def list_dataset(path='data/raw'):
     """return list of dataset exist in the `path`."""
@@ -61,3 +62,14 @@ class LoadData:
             os.path.join(path, 'interim.csv'), interim, fmt='%.3f',
             delimiter=',', header=','.join(names), comments=''
         )
+
+    def standardize(self):
+        """Standardize features in ``data.features``.
+        
+        returns
+        -------
+        standardized: standardized features
+        """
+        standardized = StandardScaler().fit_transform(self.features)
+
+        return standardized
