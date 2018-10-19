@@ -1,6 +1,7 @@
 import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 
 def cycle_plot(data, engine_id, colname, rowname=None):
@@ -21,6 +22,19 @@ def cycle_plot(data, engine_id, colname, rowname=None):
         x = 'Cycle'
     else:
         x = rowname
-    sns.lmplot(x=x, y=colname, data=data, scatter_kws={'s': 10}, size=7)
+    dataengine = data.loc[data['EngineID']==engine_id]
+    ax = sns.lmplot(x=x, y=colname, data=dataengine, height=10, fit_reg=False)
     plt.title(f'{x} vs {colname} in Engine-{engine_id}')
     plt.show()
+
+    return ax
+
+
+def save_plot(figure, name=None, pathname='src/visualization'):
+    """Save figure into ``pathname``."""
+    if name is None:
+        filename = os.path.join(pathname, figure.ax.title.get_text())
+    else:
+        filename = os.path.join(pathname, name)
+    figure.savefig(filename)
+    print('[INFO] figure is saved')
