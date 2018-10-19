@@ -2,6 +2,14 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.preprocessing import StandardScaler
+import json
+
+def get_json(filename):
+    """Return features title from json file."""
+    with open(filename, 'r') as f:
+        featurelist = json.load(f)
+
+    return list(featurelist.values())
 
 def list_dataset(path='data/raw'):
     """return list of dataset exist in the `path`."""
