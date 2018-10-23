@@ -20,7 +20,7 @@ def training(
     epoch_loss = 0
     steps = 0
 
-    for epoch in epochs:
+    for epoch in range(epochs):
         for features, labels in zip(featureloader, labelloader):
             steps += 1
             features = features.type(torch.FloatTensor)
@@ -45,7 +45,7 @@ def training(
 
 if __name__ == '__main__':
     argument = get_argument()
-    feature_name = get_json('../../references/col_to_feat.json')
+    feature_name = get_json('references/col_to_feat.json')
     train = LoadData(argument.data, names=feature_name, sep='\s+')
     scaled_train = train.standardize()
     # convert dataset into tensor
