@@ -55,7 +55,7 @@ if __name__ == '__main__':
     featureloader = torch.utils.data.DataLoader(featureset, batch_size=32)
     labelloader = torch.utils.data.DataLoader(labelset, batch_size=32)
     # define the model
-    model = NN(hidden_sizes=argument.hidden_units)
+    model = NN(hidden_sizes=argument.hidden_units, drop_p=argument.drop_p)
     # define loss function and optimizer
     criterion = nn.MSELoss()
     optimizer = optim.RMSprop(model.parameters(), lr=argument.learning_rate)

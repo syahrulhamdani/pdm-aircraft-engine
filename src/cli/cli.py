@@ -30,6 +30,11 @@ def get_argument():
         "--gpu", action='store_true', default=False,
         help='gpu on/off'
     )
+    # Add dropout argument input from user
+    parser.add_argument(
+        "--drop_p", action='store', default=0.4, type=float,
+        help="drop out probability"
+    )
 
     arg = parser.parse_args()
 
