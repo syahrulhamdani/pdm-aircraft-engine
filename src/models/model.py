@@ -26,9 +26,12 @@ class NN(nn.Module):
         self.dropout = nn.Dropout(drop_p)
     
     def forward(self, X):
-        for linear in self.hidden_layers:
-            X = F.relu(linear(X))
-            X = self.dropout(X)
+        for index, linear in enumerate(self.hidden_layers):
+            if index % 2 == 0:
+                X = linear(X)
+                X = self.dropout(X)
+            elif index % 2 != 0:
+                X = torch.tanh(linear(X))
         
         X = self.output(X)
 
