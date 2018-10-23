@@ -4,7 +4,9 @@ import torch.nn.functional as F
 
 class NN(nn.Module):
     """Neural Network Generator."""
-    def __init__(self, input_size, hidden_sizes, output_size, drop_p):
+    def __init__(
+        self, input_size=24, hidden_sizes=[20,5], output_size=1, drop_p=0.4
+    ):
         """Generate fully-connected neural network.
 
         parameters
