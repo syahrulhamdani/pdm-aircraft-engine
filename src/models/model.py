@@ -2,10 +2,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class NN(nn.Module):
     """Neural Network Generator."""
     def __init__(
-        self, input_size=24, hidden_sizes=[20,5], output_size=1, drop_p=0.4
+        self, input_size=24, hidden_sizes=[20, 5], output_size=1, drop_p=0.4
     ):
         """Generate fully-connected neural network.
 
@@ -21,10 +22,10 @@ class NN(nn.Module):
             nn.Linear(input_size, hidden_sizes[0])
         ])
         layers = zip(hidden_sizes[:-1], hidden_sizes[1:])
-        self.hidden_layers.extend([nn.Linear(h1,h2) for h1,h2 in layers])
+        self.hidden_layers.extend([nn.Linear(h1, h2) for h1, h2 in layers])
         self.output = nn.Linear(hidden_sizes[-1], output_size)
         self.dropout = nn.Dropout(drop_p)
-    
+
     def forward(self, X):
         for index, linear in enumerate(self.hidden_layers):
             if index % 2 == 0:
@@ -32,7 +33,6 @@ class NN(nn.Module):
                 X = self.dropout(X)
             elif index % 2 != 0:
                 X = torch.tanh(linear(X))
-        
         X = self.output(X)
 
         return F.relu(X)
