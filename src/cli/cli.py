@@ -1,6 +1,7 @@
 import argparse
 import torch
 
+
 def get_argument():
     parser = argparse.ArgumentParser(
         description="argument input for train the network by user"
@@ -24,7 +25,7 @@ def get_argument():
     )
     parser.add_argument(
         '--hidden_units', '-hu', action='store', nargs='*', type=int,
-        help='number and size of hidden layers', default=[32,24]
+        help='number and size of hidden layers', default=[32, 24]
     )
     parser.add_argument(
         "--gpu", action='store_true', default=False,
