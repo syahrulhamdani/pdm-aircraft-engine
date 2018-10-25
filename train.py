@@ -87,5 +87,5 @@ if __name__ == '__main__':
     # save the trained model
     save_model(
         model, argument.epochs, optimizer,
-        filename='checkpoint.pth', save_dir=argument.save_dir
+        filename=argument.save_name, save_dir=argument.save_dir
     )

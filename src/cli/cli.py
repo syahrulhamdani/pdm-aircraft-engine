@@ -16,6 +16,10 @@ def get_argument():
         help="directory to save the trained model", default='.'
     )
     parser.add_argument(
+        '--save_name', '-name', type=str, action='store',
+        help="filename of saved model", default='checkpoint.pth'
+    )
+    parser.add_argument(
         '--epochs', '-e', type=int, action='store',
         help='number of epochs', default=5
     )
