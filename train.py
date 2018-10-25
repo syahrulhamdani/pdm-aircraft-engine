@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import torch
 import torch.nn as nn
@@ -43,6 +44,24 @@ def training(
                 epoch_loss = 0
 
 
+def save_model(
+    model,
+    epochs,
+    optimizer,
+    filename='checkpoint.pth',
+    save_dir='reports'
+):
+    checkpoint = {
+        'model': model,
+        'model_state': model.state_dict(),
+        'epochs': epochs,
+        'optim': optimizer,
+        'optim_state': optimizer.state_dict()
+    }
+    torch.save(checkpoint, os.path.join(save_dir, filename))
+    print('[INFO] model is saved!')
+
+
 if __name__ == '__main__':
     argument = get_argument()
     feature_name = get_json('references/col_to_feat.json')
@@ -64,4 +83,9 @@ if __name__ == '__main__':
         model, criterion, optimizer,
         featureloader, labelloader,
         epochs=argument.epochs
+    )
+    # save the trained model
+    save_model(
+        model, argument.epochs, optimizer,
+        filename='checkpoint.pth', save_dir=argument.save_dir
     )
