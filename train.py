@@ -48,6 +48,7 @@ def save_model(
     model,
     epochs,
     optimizer,
+    scaler,
     filename='checkpoint.pth',
     save_dir='reports'
 ):
@@ -56,7 +57,8 @@ def save_model(
         'model_state': model.state_dict(),
         'epochs': epochs,
         'optim': optimizer,
-        'optim_state': optimizer.state_dict()
+        'optim_state': optimizer.state_dict(),
+        'scaler': scaler
     }
     torch.save(checkpoint, os.path.join(save_dir, filename))
     print('[INFO] model is saved!')
@@ -66,7 +68,7 @@ if __name__ == '__main__':
     argument = get_argument()
     feature_name = get_json('references/col_to_feat.json')
     train = LoadData(argument.data, names=feature_name, sep='\s+')
-    scaled_train = train.standardize()
+    scaled_train, scaler = train.standardize()
     # convert dataset into tensor
     featureset = torch.from_numpy(scaled_train[:, 2:])
     labelset = torch.from_numpy(train.target)
@@ -86,6 +88,6 @@ if __name__ == '__main__':
     )
     # save the trained model
     save_model(
-        model, argument.epochs, optimizer,
+        model, argument.epochs, optimizer, scaler,
         filename=argument.save_name, save_dir=argument.save_dir
     )
