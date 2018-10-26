@@ -51,5 +51,32 @@ def get_argument():
     return arg
 
 
+def get_infer_arg():
+    parser = argparse.ArgumentParser(
+        help="argument input for inference"
+    )
+
+    parser.add_argument(
+        'signal', action='store', type=str,
+        default='test_FD001.txt', help='path to signal test'
+    )
+    parser.add_argument(
+        'model', action='store', type=str, default='checkpoint.pth',
+        help='saved model to use for inferencing'
+    )
+    parser.add_argument(
+        '--gpu', action='store_true', default=False,
+        help='gpu on/off'
+    )
+    argument = parser.parse_args()
+
+    if argument.gpu and torch.cuda.is_available():
+        argument.with_gpu = 'cuda'
+    else:
+        argument.with_gpu = 'cpu'
+
+    return argument
+
+
 if __name__ == '__main__':
     get_argument()
