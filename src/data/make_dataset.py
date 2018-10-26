@@ -87,6 +87,7 @@ class LoadData:
         -------
         standardized: standardized features
         """
-        standardized = StandardScaler().fit_transform(self.features)
+        scaler = StandardScaler()
+        standardized = scaler.fit_transform(self.features)
 
-        return standardized
+        return standardized, scaler
