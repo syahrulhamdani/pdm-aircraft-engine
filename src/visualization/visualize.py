@@ -6,7 +6,7 @@ import os
 
 def cycle_plot(data, engine_id, colname, rowname=None):
     """helper function to plot ``col`` and indices (cycle) of certain engine.
-    
+
     parameters
     ----------
     data: Dataset
@@ -22,7 +22,7 @@ def cycle_plot(data, engine_id, colname, rowname=None):
         x = 'Cycle'
     else:
         x = rowname
-    dataengine = data.loc[data['EngineID']==engine_id]
+    dataengine = data.loc[data['EngineID'] == engine_id]
     ax = sns.lmplot(x=x, y=colname, data=dataengine, height=10, fit_reg=False)
     plt.title(f'{x} vs {colname} in Engine-{engine_id}')
     plt.show()
