@@ -2,7 +2,27 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.preprocessing import StandardScaler
+import argparse
+from datetime import datetime as dt
 import json
+
+
+def get_user_input():
+    """Get user input only for `make_dataset`."""
+    parser = argparse.ArgumentParser(
+        description="user input for `make_dataset.py`"
+    )
+    parser.add_argument(
+        'data', type=str, action='store', help='data filename',
+        default='train_FD001.txt'
+    )
+    parser.add_argument(
+        '--save_interim', '-si', action='store_true',
+        default=False, help='save interim data or not'
+    )
+    argument = parser.parse_args()
+
+    return argument
 
 
 def get_json(filename):
@@ -91,3 +111,48 @@ class LoadData:
         standardized = scaler.fit_transform(self.features)
 
         return standardized, scaler
+
+
+if __name__ == '__main__':
+    # get user niput
+    argument = get_user_input()
+    # get features title from `col_to_feat` in `references`
+    feat_name = get_json('references/col_to_feat.json')
+    # load raw data
+    raw_data = LoadData(argument.data, names=feat_name, sep='\s+')
+    # standardize the data
+    scaled_data, scaler = raw_data.standardize()
+    # concatenate `target` into `features`
+    processed_data = np.concatenate((
+        scaled_data, raw_data.target.reshape(
+             raw_data.target.shape[0], -1
+        )),
+        axis=1
+    )
+    # save `processed_data` and `interim` data (optional)
+    date = dt.now().date()
+    if argument.save_interim:
+        print('Save interim data first..')
+        prefix = argument.data.split('.')[0]
+        filename = \
+            'data/interim/{}_'.format(prefix) \
+            + dt.strftime(date, '%b-%d-%y') \
+            + '_i.csv'
+        np.savetxt(
+            filename, scaled_data, delimiter=',',
+            header=','.join(feat_name), fmt='%.3f',
+            comments=''
+        )
+    feat_name = np.append(feat_name, 'RUL')
+    print('Save processed data..')
+    prefix = argument.data.split('.')[0]
+    filename = \
+        'data/processed/{}'.format(prefix) \
+        + dt.strftime(date, '%b-%d-%y') \
+        + '_p.csv'
+    np.savetxt(
+        filename, processed_data, delimiter=',',
+        header=','.join(feat_name), fmt='%.3f',
+        comments=''
+    )
+    print("[DONE] All data's saved!")
