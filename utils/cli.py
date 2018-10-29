@@ -53,7 +53,7 @@ def get_argument():
 
 def get_infer_arg():
     parser = argparse.ArgumentParser(
-        help="argument input for inference"
+        description="argument input for inference"
     )
 
     parser.add_argument(
