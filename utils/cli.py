@@ -78,5 +78,37 @@ def get_infer_arg():
     return argument
 
 
+def get_validate_arg():
+    parser = argparse.ArgumentParser(
+        description='argument input for validation'
+    )
+
+    parser.add_argument(
+        'signal', action='store', type=str,
+        default='processed.csv', help='path to signal validation'
+    )
+    parser.add_argument(
+        '--gpu', action='store_true', default=False,
+        help='gpu on/off'
+    )
+    parser.add_argument(
+        'model', action='store', type=str, default='checkpoint.pth',
+        help='saved model to use for validation'
+    )
+    parser.add_argument(
+        "save_dir", type=str, action='store',
+        help="directory to save comparation plot",
+        default='reports/figures/rul-comparison'
+    )
+    argument = parser.parse_args()
+
+    if argument.gpu and torch.cuda.is_available():
+        argument.with_gpu = 'cuda'
+    else:
+        argument.with_gpu = 'cpu'
+
+    return argument
+
+
 if __name__ == '__main__':
     get_argument()
