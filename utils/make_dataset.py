@@ -113,6 +113,14 @@ class LoadData:
         return standardized, scaler
 
 
+def get_processed(filename):
+    """Read processed data from ``path``."""
+    filename = os.path.join('data/processed', filename)
+    processed_data = pd.read_csv(filename)
+
+    return processed_data
+
+
 if __name__ == '__main__':
     # get user niput
     argument = get_user_input()
