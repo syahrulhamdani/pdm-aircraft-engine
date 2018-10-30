@@ -155,7 +155,7 @@ if __name__ == '__main__':
     print('Save processed data..')
     prefix = argument.data.split('.')[0]
     filename = \
-        'data/processed/{}'.format(prefix) \
+        'data/processed/{}_'.format(prefix) \
         + dt.strftime(date, '%b-%d-%y') \
         + '_p.csv'
     np.savetxt(
