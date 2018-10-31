@@ -41,6 +41,6 @@ In here, I use simulation data engine's provided by NASA which can be found [her
 └── predict.py              <- Scripts to infer and predict given data using saved trained model
 ```
 
-## Requirements
-
 ## Usage
+
+Still updating..
