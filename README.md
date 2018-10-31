@@ -10,40 +10,35 @@ In here, I use simulation data engine's provided by NASA which can be found [her
 
 ```tree
 .
-├── LICENSE
-├── READMME.md          <- README for developers using this project.
+├── READMME.md              <- README for developers using this project.
 ├── data
-│   ├── external        <- Data from third party sources.
-│   ├── interim         <- Intermediate data that has been transformed.
-│   ├── processed       <- The final, canonical data, ABT set for modeling.
-│   ├── raw             <- The original, immutable data dump.
-├── models              <- Trained and serialized model, model prediction, or summaries
+│   ├── interim             <- Intermediate data that has been transformed.
+│   ├── processed           <- The final, canonical data, ABT set for modeling.
+│   └── raw                 <- The original, immutable data dump.
 │
-├── notebooks           <- Jupyter notebooks with default naming `number-initials-delimited-description`,
-│                          e.g. `1.0-sbh-initial-exploratory`
+├── models                  <- Trained and serialized model, model prediction, or summaries
 │
-├── references          <- Data dictionaries, category-class mapping, data headers,
-│                          and all other explanatory materials.
+├── notebooks               <- Jupyter notebooks with default naming `number-initials-delimited-description`,
+│                               e.g. `1.0-sbh-initial-exploratory`
 │
-├── reports             <- Generated analysis as HTML, PDF, LaTex, etc.
-│   ├── figures         <- Genereted graphics and figures to be used in reporting
+├── references              <- Data dictionaries, category-class mapping, data headers,
+│                               and all other explanatory materials.
 │
-├── requirements.txt    <- The requirements file or library or packages for reproducing analysis environment,
-│                          e.g. generated with `pip` or `conda` or directly using `docker`
+├── reports                 <- Generated analysis as HTML, PDF, LaTex, etc.
+│   ├── figures             <- Genereted graphics and figures to be used in reporting
+│   └── models              <- Checkpoints of trained models
 │
-└── src                 <- Source code for use in in this project
-    ├── cli             <- Scripts to get user input via cli
-    │   └── cli.py
-    │
-    ├── data            <- Scripts to download and/or generate dataset
-    │   └── make_dataset.py
-    │
-    ├── models            <- Scripts to train the model, inference, and save trained models
-    │   └── train.py
-    │   └── predict.py
-    │
-    └── visualization   <- Scripts to create exploratory and results oriented visualizations
-        └── visualize.py
+├── requirements.txt        <- The requirements file or library or packages for reproducing analysis environment,
+│                               e.g. generated with `pip` or `conda` or directly using `docker`
+│
+├── utils                   <- Source code for use in in this project
+│   ├── cli.py              <- Scripts to get user input via cli
+│   ├── make_dataset.py     <- Scripts to prepare and/or generate dataset, including preprocessing steps
+│   └── visualize.py        <- Scripts to create exploratory and results oriented visualizations
+│
+├── train.py                <- Scripts to train model
+├── compare_plot            <- Scripts to estimate rul and create a comparison plot with original rul
+└── predict.py              <- Scripts to infer and predict given data using saved trained model
 ```
 
 ## Requirements
