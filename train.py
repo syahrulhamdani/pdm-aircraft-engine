@@ -4,9 +4,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets
-from src.cli import get_argument
-from src.models import NN
-from src.data import LoadData, get_json
+from utils.cli import get_argument
+from utils.model import NN
+from utils.make_dataset import LoadData, get_json
 
 
 def training(
